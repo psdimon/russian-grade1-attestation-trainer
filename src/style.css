@@ -1,0 +1,284 @@
+:root {
+  --border: #000;
+  --font: "Times New Roman", serif;
+  --fs: 16pt;
+  --print-fs: 12pt;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--fs);
+  background: #f3f3f3;
+  color: #000;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+button, input, select {
+  font: inherit;
+  font-size: 12pt;
+}
+
+button {
+  padding: 6px 10px;
+  cursor: pointer;
+  border: 1px solid #333;
+  background: #fff;
+}
+
+input, select {
+  padding: 4px 6px;
+  border: 1px solid #333;
+  background: #fff;
+}
+
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12pt;
+}
+
+.status {
+  font-size: 11pt;
+  padding: 4px 8px;
+  border: 1px solid #333;
+  background: #f8f8f8;
+  white-space: nowrap;
+}
+
+.pages {
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+  justify-content: center;
+}
+
+.page {
+  width: 297mm;
+  min-height: 210mm;
+  background: #fff;
+  padding: 8mm;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.title {
+  font-weight: 700;
+  margin-bottom: 4mm;
+}
+
+.grid-main {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  grid-template-rows: auto auto auto auto;
+  border: 1px solid var(--border);
+}
+
+.cell {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 6px;
+}
+
+.cell:nth-child(2n) { border-right: 0; }
+
+.row-last-left,
+.row-last-right { border-bottom: 0; }
+
+.task-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.12;
+}
+
+.items {
+  display: grid;
+  gap: 2px;
+}
+
+.cols-2 {
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cols-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.item {
+  line-height: 1.18;
+  white-space: nowrap;
+}
+
+.answer-on .item.correct {
+  background: #e8f8e8;
+  font-weight: 700;
+}
+
+.answers-inline {
+  margin-top: 5px;
+  font-size: 12pt;
+  line-height: 1.2;
+  border: 1px dashed #666;
+  padding: 3px 5px;
+  background: #fafafa;
+}
+
+.letters-wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.letters-col .item { white-space: normal; }
+
+.section-grid {
+  margin-top: 4mm;
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.section {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 6px;
+}
+
+.section:nth-child(2n) { border-right: 0; }
+
+.section.bottom { border-bottom: 0; }
+
+.line {
+  border-bottom: 1px solid #000;
+  height: 1.2em;
+  display: inline-block;
+  min-width: 40px;
+  vertical-align: middle;
+}
+
+.small-table {
+  width: 180px;
+  border-collapse: collapse;
+  margin-top: 4px;
+  font-size: 14pt;
+}
+
+.small-table td {
+  border: 1px solid #000;
+  height: 30px;
+  width: 50%;
+}
+
+.mono { letter-spacing: 0.4px; }
+
+.scheme-list {
+  margin-top: 4px;
+  display: grid;
+  gap: 6px;
+}
+
+.scheme-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 6px;
+}
+
+.scheme-word {
+  white-space: nowrap;
+  min-width: 60px;
+}
+
+.scheme-box {
+  border: 1px solid #000;
+  height: 22px;
+  width: 100%;
+}
+
+@media print {
+  @page { size: A4 landscape; margin: 5mm; }
+
+  body {
+    background: #fff;
+    font-size: var(--print-fs);
+  }
+
+  .toolbar { display: none; }
+
+  .pages {
+    padding: 0;
+    gap: 0;
+  }
+
+  .page {
+    border: 0;
+    width: auto;
+    min-height: 0;
+    padding: 4mm;
+    page-break-after: always;
+  }
+
+  .page:last-child { page-break-after: auto; }
+
+  .title { margin-bottom: 2mm; }
+
+  .cell,
+  .section { padding: 3px; }
+
+  .task-title {
+    margin-bottom: 2px;
+    line-height: 1.05;
+  }
+
+  .items { gap: 0; }
+
+  .cols-2 { gap: 6px; }
+
+  .cols-3 { gap: 5px; }
+
+  .item {
+    line-height: 1.05;
+    background: transparent;
+  }
+
+  .section-grid { margin-top: 2mm; }
+
+  .small-table {
+    font-size: 11pt;
+    width: 130px;
+  }
+
+  .small-table td { height: 18px; }
+
+  .line {
+    min-width: 30px;
+    height: 1em;
+  }
+
+  .scheme-list { gap: 4px; }
+
+  .scheme-row { gap: 4px; }
+
+  .scheme-word { min-width: 54px; }
+
+  .scheme-box { height: 18px; }
+
+  .answers-inline { display: none; }
+}
